@@ -1,8 +1,8 @@
-"""Create Tables
+"""Create Table
 
-Revision ID: a9a04afc7670
+Revision ID: 23a62c8bb75b
 Revises: 
-Create Date: 2023-05-18 02:10:26.150448
+Create Date: 2023-05-18 19:27:18.032442
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a9a04afc7670'
+revision = '23a62c8bb75b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,11 +39,13 @@ def upgrade():
     )
     op.create_table('chatbot_responses',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('message_id', sa.Integer(), nullable=False),
+    sa.Column('message_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('response_content', sa.Text(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['message_id'], ['messages.id'], name=op.f('fk_chatbot_responses_message_id_messages')),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], name=op.f('fk_chatbot_responses_user_id_users')),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

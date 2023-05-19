@@ -9,17 +9,17 @@ metadata = MetaData(naming_convention={
 })
 db = SQLAlchemy(metadata=metadata)
 
-
 class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable = False)
+    name = db.Column(db.String, nullable=False)
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
     password = db.Column(db.String, nullable=False)
 
-    messages = db.relationship('Message', backref='user')
+    # messages = db.relationship('Message', backref='users', lazy=False)
+    message = db.relationship('ChatbotResponse', back_populates='users', lazy=False)
 
 
 class Message(db.Model):
@@ -32,16 +32,22 @@ class Message(db.Model):
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
 
     # Relationship with user
-    user = db.relationship('User', backref='messages')
+    user = db.relationship('ChatbotResponse',back_populates='messages',lazy=False)
 
 
 class ChatbotResponse(db.Model):
     __tablename__ = 'chatbot_responses'
 
     id = db.Column(db.Integer, primary_key=True)
-    message_id = db.Column(db.Integer, db.ForeignKey('messages.id'), nullable=False)
+    message_id = db.Column(db.Integer, db.ForeignKey('messages.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     response_content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate = db.func.now())
+
+    users = db.relationship('User', back_populates='message', lazy=False)
+    messages = db.relationship('Message', back_populates='user', lazy=False)
+
+
 
 

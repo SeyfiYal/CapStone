@@ -46,6 +46,21 @@ class Users(Resource):
 
 api.add_resource(Users, '/users')
 
+class Login(Resource):
+    def post(self):
+        data = request.get_json()
+        email = data['email']
+        password = data['password']
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if (user.password == password):
+                session['user_id'] = user.id
+                
+                return make_response(user.to_dict(), 200)
+        return make_response({'error': '401 Unauthorized'}, 401)
+        
+api.add_resource(Login, '/login')
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

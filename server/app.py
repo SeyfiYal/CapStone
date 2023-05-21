@@ -58,7 +58,6 @@ class Login(Resource):
                 
                 return make_response(user.to_dict(), 200)
         return make_response({'error': '401 Unauthorized'}, 401)
-        
 api.add_resource(Login, '/login')
 
 

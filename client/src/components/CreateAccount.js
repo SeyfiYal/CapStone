@@ -17,12 +17,13 @@ function CreateAccount() {
             required 
             />
 
-        <label htmlFor="psw"><b>Password</b></label>
+        <label htmlFor="psw">
+            <b>Password</b></label>
         <input 
-            type="password" 
-            placeholder="Enter Password" 
-            name="psw" 
-            required 
+        type="password" 
+        placeholder="Enter Password" 
+        name="psw" 
+        required 
         />
 
         <label htmlFor="psw-repeat"><b>Repeat Password</b></label>

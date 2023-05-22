@@ -52,7 +52,7 @@ function Login() {
         </div>
 
         <div className="container" style={{ backgroundColor: "#f1f1f1" }}>
-          <button type="button" className="cancelbtn">Cancel</button>
+          {/* <button type="button" className="cancelbtn">Cancel</button> */}
           <span className="psw">Forgot <a href="#">password?</a></span>
         </div>
       </form>

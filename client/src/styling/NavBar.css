@@ -1,34 +1,36 @@
 /* Style the navigation bar */
 .navbar {
-    width: 100%;
-    background-color: #555;
-    overflow: auto;
-  }
-  
-  /* Navbar links */
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+/* Navbar links */
+.navbar a {
+  display: inline-block;
+  float: right;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 15px;
+  animation: glow 2s infinite alternate; /* Added glow animation */
+}
+
+.navbar a:hover {
+  background-color: rgb(255, 255, 255);
+}
+
+.login-btn {
+  /* background-color: #04aa6dec; */
+  margin-right: 10px; /* Adjust the right margin to move it slightly to the left */
+}
+
+/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
+@media screen and (max-width: 500px) {
   .navbar a {
-    float: right;
-    text-align: center;
-    padding: 12px;
-    color: white;
-    text-decoration: none;
-    font-size: 17px;
+    float: none;
+    display: block;
   }
-  
-  /* Navbar links on mouse-over */
-  .navbar a:hover {
-    background-color: #000;
-  }
-  
-  /* Current/active navbar link */
-  .login-btn {
-    background-color: #04AA6D;
-  }
-  
-  /* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
-  @media screen and (max-width: 500px) {
-    .navbar a {
-      float: none;
-      display: block;
-    }
-  }
+}

@@ -1,0 +1,56 @@
+body {
+    background-color: #000000; 
+  }
+  
+  
+  .front-page {
+    text-align: center;
+    padding: 40px;
+  }
+  
+  .front-page h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #FFFFFF; /* Set font color for better visibility */
+  }
+  
+  .front-page p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #FFFFFF; /* Set font color for better visibility */
+  }
+  
+  .create-account-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .create-account-btn a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 15px;
+    animation: glow 2s infinite alternate; /* Added glow animation */
+  }
+  
+  .create-account-btn a:hover {
+    background-color: #ffffff;
+  }
+  
+  @keyframes glow {
+    0% {
+      box-shadow: 0 0 0 rgba(255, 255, 255, 0.3); /* Initial box-shadow values */
+    }
+    100% {
+      box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.5); /* Final box-shadow values */
+    }
+  }
+  
+  
+  
+  

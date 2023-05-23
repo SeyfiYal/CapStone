@@ -14,9 +14,8 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-    response = [""]
-
     # Seed Users
+    users = []
     for i in range(5):
         user = User(
             name=fake.name(),
@@ -24,27 +23,23 @@ with app.app_context():
             email=fake.email(),
             password='password'
         )
-
         db.session.add(user)
+        users.append(user)
 
     db.session.commit()
 
-    for i in range(5):
+    for user in users:
         message = Message(
             content = "Hello",
-            user_id=10
-
+            user_id=user.id
         )
         db.session.add(message)
         db.session.commit()
 
-    for i in range(5):
-
         chatbotresponse = ChatbotResponse(
-            message_id = 10,
-            user_id = 10,
-            response_content = 10
-
+            message_id = message.id,
+            user_id = user.id,
+            response_content = "Response"
         )
         db.session.add(chatbotresponse)
         db.session.commit()

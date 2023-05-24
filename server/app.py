@@ -48,9 +48,6 @@ class Users(Resource):
 api.add_resource(Users, '/users')
 
 
-
-
-
 class Login(Resource):
     def post(self):
         data = request.get_json()

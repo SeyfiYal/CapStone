@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import "../styling/CreateAccount.css"; // Import your CSS file for styling
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
+import { faEye, faEyeSlash, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import "../styling/CreateAccount.css";
 function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,68 +47,64 @@ function CreateAccount() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="create-account-form">
-      <div className="container">
-        {/* Form fields */}
-        <label htmlFor="name">
-          <b>Name</b>
-        </label>
-        <input
-          type="text"
-          placeholder="Enter Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+    <div className="create-account-form">
+      <div className="text">CREATE ACCOUNT</div>
+      <form onSubmit={handleSubmit}>
+        <div className="field">
+          <div className="fas">
+            <FontAwesomeIcon icon={faEnvelope} />
+          </div>
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
 
-        <label htmlFor="email">
-          <b>Email</b>
-        </label>
-        <input
-          type="text"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <div className="field">
+          <div className="fas">
+            <FontAwesomeIcon icon={faEnvelope} />
+          </div>
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-        <label htmlFor="password">
-          <b>Password</b>
-        </label>
-        <div className="password-input-container">
+        <div className="field">
+          <div className="fas">
+            <FontAwesomeIcon icon={faLock} />
+          </div>
           <input
             type={showPassword ? "text" : "password"}
-            placeholder="Enter Password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <span
-            className={`password-toggle ${showPassword ? "show" : ""}`}
-            onClick={togglePasswordVisibility}
-          >
-            <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
-              className="eye-icon"
-            />
-          </span>
         </div>
 
-        <label htmlFor="confirm-password">
-          <b>Confirm Password</b>
-        </label>
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
+        <div className="field">
+          <div className="fas">
+            <FontAwesomeIcon icon={faLock} />
+          </div>
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </div>
 
-        {/* Submit button */}
-        <button type="submit">Sign Up</button>
-      </div>
-    </form>
+        <button>SIGN UP</button>
+      </form>
+    </div>
   );
 }
 

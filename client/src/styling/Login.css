@@ -111,3 +111,20 @@ button:hover {
 .link a:hover {
   text-decoration: underline;
 }
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #000;
+  overflow: hidden; /* Hide scrollbars */
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+

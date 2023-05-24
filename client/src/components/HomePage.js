@@ -11,11 +11,13 @@ function HomePage() {
     <h1>A Caring AI Companion</h1>
     <p>Here to listen and engage in conversation.</p>
     <p>Always by your side, ready to assist.</p>
-      <div className="create-account-btn">
+
+      <div className="create-account-btn"> 
         <Link to="/create-account">
           <FontAwesomeIcon icon={faUserPlus} /> Create Account
         </Link>
       </div>
+      
     </div>
   );
 }

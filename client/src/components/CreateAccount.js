@@ -5,8 +5,9 @@ import "../styling/CreateAccount.css";
 function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
+  const [username, setUserName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
@@ -19,8 +20,10 @@ function CreateAccount() {
 
     const userData = {
       name: name,
+      username: username,
       email: email,
       password: password,
+      
     };
 
     fetch("http://localhost:5555/users", {
@@ -50,6 +53,7 @@ function CreateAccount() {
     <div className="create-account-form">
       <div className="text">CREATE ACCOUNT</div>
       <form onSubmit={handleSubmit}>
+
         <div className="field">
           <div className="fas">
             <FontAwesomeIcon icon={faEnvelope} />
@@ -59,6 +63,19 @@ function CreateAccount() {
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="field">
+          <div className="fas">
+            <FontAwesomeIcon icon={faEnvelope} />
+          </div>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
             required
           />
         </div>

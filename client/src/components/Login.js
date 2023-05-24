@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "../styling/Login.css"; // Import your CSS file for styling
 
 function Login() {
@@ -10,31 +10,36 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-
+  
     fetch("http://localhost:5555/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: username, // Assuming username field contains the email
+        email: username,
         password: password,
       }),
+      credentials: "include", // Include credentials for session management
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
-          // Show an error message
-          console.log(data.error);
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
         } else {
-          // Navigate to dashboard after successful login
-          navigate("/dashboard");
+          throw new Error("Incorrect email or password");
         }
       })
+      .then((data) => {
+        // Store the user details or perform any necessary actions
+        console.log("Logged in:", data);
+        navigate("/dashboard");
+      })
       .catch((error) => {
+        // Handle error and display error message
         console.error("Error:", error);
       });
   };
+  
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -67,7 +72,7 @@ function Login() {
         <button>LOGIN</button>
         <div className="link">
           Not a member?
-          <a href="#">Signup now</a>
+          <Link to="/create-account"> Signup now</Link>
         </div>
       </form>
     </div>

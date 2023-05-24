@@ -10,17 +10,20 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = b'\xef\x81J\x18\x0e\xc9\xb2+\x14BvYn\x80\xca#\x13\x90\x1e\x158\xbfX\x95'
+app.config['SESSION_TYPE'] = 'filesystem'
 
 CORS(app, supports_credentials=True)
 migrate = Migrate(app, db)
 db.init_app(app)
 api = Api(app)
 
+
 @app.route('/')
 def index():
     return '<h1> Hello World </h1>'
 
-class Users(Resource):
+
+class Users(Resource): 
     def get(self):
         user_list = [user.to_dict() for user in User.query.all()]
         if len(user_list) == 0:
@@ -42,7 +45,6 @@ class Users(Resource):
         except Exception as e:
             print('Error:', repr(e))
             return make_response({'error': 'An error occurred'}, 422)
-
 
 
 api.add_resource(Users, '/users')
@@ -71,6 +73,7 @@ class Login(Resource):
 
 api.add_resource(Login, '/login')
 
+
 class CheckSession(Resource):
     def get(self):
         user = User.query.filter(User.id == session.get('user_id')).first()
@@ -78,6 +81,7 @@ class CheckSession(Resource):
             return user.to_dict()
         else:
             return {'message': '401: Not Authorized session'}, 401
+
 
 api.add_resource(CheckSession, '/check_session')
 

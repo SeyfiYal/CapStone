@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import "../styling/Login.css"; // Import your CSS file for styling
+import { Link, useNavigate } from "react-router-dom";
+import "../styling/Login.css";
 
-function Login() {
+function Login({ setIsLoggedIn }) {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
-  
+
     fetch("http://localhost:5555/login", {
       method: "POST",
       headers: {
@@ -20,7 +19,7 @@ function Login() {
         email: username,
         password: password,
       }),
-      credentials: "include", // Include credentials for session management
+      credentials: "include",
     })
       .then((response) => {
         if (response.ok) {
@@ -30,19 +29,13 @@ function Login() {
         }
       })
       .then((data) => {
-        // Store the user details or perform any necessary actions
         console.log("Logged in:", data);
+        setIsLoggedIn(true);
         navigate("/dashboard");
       })
       .catch((error) => {
-        // Handle error and display error message
         console.error("Error:", error);
       });
-  };
-  
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
   };
 
   return (
@@ -54,11 +47,12 @@ function Login() {
           <input
             value={username}
             type="text"
-            placeholder="Email or Phone"
+            placeholder="Email"
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>
+        
         <div className="field">
           <div className="fas fa-lock"></div>
           <input
@@ -70,6 +64,7 @@ function Login() {
           />
         </div>
         <button>LOGIN</button>
+        
         <div className="link">
           Not a member?
           <Link to="/create-account"> Signup now</Link>

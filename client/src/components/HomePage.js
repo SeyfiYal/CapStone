@@ -13,11 +13,12 @@ function HomePage() {
     <p>Always by your side, ready to assist.</p>
 
       <div className="create-account-btn"> 
+      
         <Link to="/create-account">
           <FontAwesomeIcon icon={faUserPlus} /> Create Account
         </Link>
       </div>
-      
+
     </div>
   );
 }

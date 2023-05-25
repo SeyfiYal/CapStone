@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, useNavigate } from "react-router-dom";
 import { faEye, faEyeSlash, faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import "../styling/CreateAccount.css";
+
 function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -120,6 +122,10 @@ function CreateAccount() {
         </div>
 
         <button>SIGN UP</button>
+
+        <div className="link">
+          Have an account? <Link to="/login">Log in</Link>
+        </div>
       </form>
     </div>
   );

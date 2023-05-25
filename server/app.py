@@ -85,5 +85,13 @@ class CheckSession(Resource):
 
 api.add_resource(CheckSession, '/check_session')
 
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user_id', None)
+    return make_response({'message': 'Logged out successfully'}, 200)
+
+
+
+
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

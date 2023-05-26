@@ -8,13 +8,18 @@ import Logout from './Logout';
 function NavBar({ isLoggedIn, setIsLoggedIn }) {
   const location = useLocation();
 
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    // document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+  }
+
   return (
     <div className="navbar">
+      {location.pathname === '/dashboard' && (
+        <span className="menu-button" style={{ fontSize: '30px', cursor: 'pointer' }} onClick={openNav}>&#9776; Menu</span>      )}
       {isLoggedIn ? (
         <>
-          {/* <Link to="/dashboard">
-            <FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
-          </Link> */}
           <Logout setIsLoggedIn={setIsLoggedIn} />
         </>
       ) : (

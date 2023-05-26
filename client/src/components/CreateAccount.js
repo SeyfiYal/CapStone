@@ -11,6 +11,7 @@ function CreateAccount() {
   const [username, setUserName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,6 +41,8 @@ function CreateAccount() {
         // Handle successful user creation
         console.log("User created:", data);
         // Redirect to login or other relevant page
+        // setIsLoggedIn(true);
+        navigate("/login");
       })
       .catch((error) => {
         // Handle error in user creation

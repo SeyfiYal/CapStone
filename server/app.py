@@ -91,6 +91,15 @@ def logout():
     return make_response({'message': 'Logged out successfully'}, 200)
 
 
+class UserEmail(Resource):
+    def get(self):
+        user = User.query.filter(User.id == session.get('user_id')).first()
+        if user:
+            return {'email': user.email}
+        else:
+            return make_response({'error': 'User not found'}, 401)
+
+api.add_resource(UserEmail, '/user/email')
 
 
 if __name__ == "__main__":

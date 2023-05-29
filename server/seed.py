@@ -28,24 +28,38 @@ with app.app_context():
 
     db.session.commit()
 
+
+
+
     for user in users:
         message = Message(
-            content = "Hello",
+            content=fake.sentence(),  # generate a random sentence
             user_id=user.id
         )
         db.session.add(message)
-        db.session.commit()
+
+
+
+
 
         chatbotresponse = ChatbotResponse(
             message_id = message.id,
             user_id = user.id,
-            response_content = "Response"
+            response_content = fake.sentence(),
         )
         db.session.add(chatbotresponse)
         db.session.commit()
 
 
 
+
+    # for user in users:
+    #     message = Message(
+    #         content = "Hello",
+    #         user_id=user.id
+    #     )
+    #     db.session.add(message)
+    #     db.session.commit()
 
     # for i in range(5):
     #     chatbotresponse = ChatbotResponse(

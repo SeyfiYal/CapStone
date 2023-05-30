@@ -1,0 +1,26 @@
+.logout-btn {
+    background: none;
+    border: none;
+    color: #6f6;; /* Change color as per your preference */
+    height: auto;
+    width: auto;
+    padding: 0;
+    margin: 0;
+    font-size: 16px; /* Adjust font size as per your needs */
+    box-shadow: none;
+    animation: glow 1.5s infinite alternate;
+  }
+  
+  @keyframes glow {
+    0% {
+      border-color: #6f6;
+      box-shadow: 0 0 5px rgba(0, 255, 0, 0.2),
+                  inset 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    100% {
+      border-color: #6f6;
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.6),
+                  inset 0 0 10px rgba(0, 255, 0, 0.4);
+    }
+  }
+  

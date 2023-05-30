@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import '../styling/Logout.css';
 
 function Logout({ setIsLoggedIn }) {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function Logout({ setIsLoggedIn }) {
     .then((response) => {
       if (response.ok) {
         setIsLoggedIn(false);
+        localStorage.removeItem('userId');
         console.log("Logged out successfully"); 
         navigate("/");
       } else {
@@ -26,7 +28,7 @@ function Logout({ setIsLoggedIn }) {
   };
 
   return (
-    <button onClick={handleLogout}>Logout</button>
+    <button className="logout-btn" onClick={handleLogout}>Log out</button>
   );
 }
 

@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, {  useContext,useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import UserContext from './UserContext';
 import "../styling/Login.css";
 
-function Login({ setIsLoggedIn, setUserId }) {
+function Login({ setIsLoggedIn}) {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { setUserId } = useContext(UserContext);
+  
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -31,7 +34,8 @@ function Login({ setIsLoggedIn, setUserId }) {
       .then((data) => {
         console.log("Logged in:", data);
         setIsLoggedIn(true);
-        setUserId(data.user_id); // Store the user_id in state
+        setUserId(data.user_id);
+        localStorage.setItem('userId', data.user_id); // save user id to localStorage
         navigate("/dashboard");
       })
       .catch((error) => {

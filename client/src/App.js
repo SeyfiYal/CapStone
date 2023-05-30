@@ -7,33 +7,38 @@ import Login from './components/Login';
 import CreateAccount from './components/CreateAccount';
 import Dashboard from './components/Dashboard';
 import Logout from './components/Logout';
+import UserContext from './components/UserContext'; // Import the UserContext
 
 function App() {
-
-  
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState(localStorage.getItem('userId') || null);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    console.log('userId: ', userId);
-  }, [userId]);
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId);
+      setIsLoggedIn(true);
+    }
+  }, []);
+  
 
   // Add other necessary state variables
 
   return (
-    <div className="App">
-      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserId={setUserId} />
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserId={setUserId} />} />
-        <Route path="/logout" element={<Logout setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/create-account" element={<CreateAccount />} />
-        <Route path="/dashboard" element={<Dashboard userId={userId} />} /> 
-      </Routes>
-    </div>
+    <UserContext.Provider value={{ userId, setUserId }}> {/* Wrap your components with UserContext.Provider */}
+      <div className="App">
+        <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/logout" element={<Logout setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/dashboard" element={<Dashboard />} /> {/* Remove the userId prop from Dashboard */}
+        </Routes>
+      </div>
+    </UserContext.Provider>
   );
 }
 

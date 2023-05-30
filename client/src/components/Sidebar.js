@@ -1,0 +1,80 @@
+import React, { useState } from 'react';
+import '../styling/SideBar.css';
+import SettingsSidebar from './SettingsSidebar';
+
+function Sidebar() {
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  function toggleSettings() {
+    setIsSettingsOpen(!isSettingsOpen);
+  }
+
+  return (
+    <div className="sidebar-container">
+      <div id="mySidenav" className="sidenav">
+        <a href="javascript:void(0)" className="closebtn">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+        <a href="#" onClick={toggleSettings}>Settings</a>
+      </div>
+      <SettingsSidebar isOpen={isSettingsOpen} onSettingsUpdate={() => {}} />
+    </div>
+  );
+}
+
+export default Sidebar;
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useRef } from 'react';
+// import SettingsSidebar from './SettingsSidebar';
+// import '../styling/SideBar.css';
+
+// function Sidebar({ openSettingsSidebar }) {
+//   const [showSettings, setShowSettings] = useState(false);
+//   const mySidenav = useRef(null);
+
+//   const openSettings = () => {
+//     setShowSettings(true);
+//     if (mySidenav.current) {
+//       mySidenav.current.style.width = "0";
+//     }
+//   };
+
+//   const closeNav = () => {
+//     if (mySidenav.current) {
+//       mySidenav.current.style.width = "0";
+//     }
+//   };
+
+//   return (
+//     <div id="mySidenav" className="sidenav">
+//       <a href="javascript:void(0)" className="closebtn" onClick={closeNav}>&times;</a>
+//       <a href="#">About</a>
+//       <a href="#">Services</a>
+//       <a href="#">Clients</a>
+//       <a href="#">Contact</a>
+//       <a href="#" onClick={openSettings}>Settings</a>
+//     </div>
+//   );
+// }
+
+// export default Sidebar;
+
+
+
+
+
+
+
+
+

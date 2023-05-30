@@ -34,9 +34,14 @@
   top: 0;
   right: 25px;
   font-size: 25px;
-  margin-left: 50px;
   color: #f1f1f1;
+  cursor: pointer; /* Add cursor property */
 }
+
+.sidenav .closebtn:hover {
+  color: #fff; /* Update the hover color if desired */
+}
+
 
 #main {
   transition: margin-left .5s;

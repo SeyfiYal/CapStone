@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../styling/Login.css";
 
-function Login({ setIsLoggedIn }) {
+function Login({ setIsLoggedIn, setUserId }) {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -31,12 +31,14 @@ function Login({ setIsLoggedIn }) {
       .then((data) => {
         console.log("Logged in:", data);
         setIsLoggedIn(true);
+        setUserId(data.user_id); // Store the user_id in state
         navigate("/dashboard");
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
+
 
   return (
     <div className="login-form">
@@ -75,3 +77,5 @@ function Login({ setIsLoggedIn }) {
 }
 
 export default Login;
+
+

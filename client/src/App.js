@@ -9,8 +9,36 @@ import Dashboard from './components/Dashboard';
 import Logout from './components/Logout';
 
 function App() {
+
+  
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    console.log('userId: ', userId);
+  }, [userId]);
+
+  // Add other necessary state variables
+
+  return (
+    <div className="App">
+      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUserId={setUserId} />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserId={setUserId} />} />
+        <Route path="/logout" element={<Logout setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/dashboard" element={<Dashboard userId={userId} />} /> 
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+
 
   // useEffect(() => {
   //   fetch("http://localhost:5555/check_session", {
@@ -35,19 +63,3 @@ function App() {
   //   });
   // }, []);
 
-  return (
-    <div className="App">
-      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/logout" element={<Logout setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/create-account" element={<CreateAccount />} />
-        <Route path="/dashboard" element={<Dashboard />} /> 
-      </Routes>
-    </div>
-  );
-}
-
-export default App;

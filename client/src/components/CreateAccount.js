@@ -26,8 +26,9 @@ function CreateAccount() {
       username: username,
       email: email,
       password: password,
-      
+
     };
+    
 
     fetch("http://localhost:5555/users", {
       method: "POST",

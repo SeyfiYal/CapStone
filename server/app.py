@@ -198,14 +198,24 @@ class UserDelete(Resource):
             return make_response({'error': 'User not found'}, 404)
 
         try:
+            # Delete user's messages
+            Message.query.filter_by(user_id=user_id).delete()
+            # Delete user's chatbot responses
+            ChatbotResponse.query.filter_by(user_id=user_id).delete()
+            # Delete the user
             db.session.delete(user)
             db.session.commit()
-            return make_response({'message': 'User deleted'}, 200)
+            
+            # Clear the user session
+            session.pop('user_id', None)
+
+            return make_response({'message': 'Account succesfully deleted'}, 200)
         except Exception as e:
             print('Error:', repr(e))
             return make_response({'error': 'An error occurred'}, 422)
 
 api.add_resource(UserDelete, '/user/delete')
+
 
 class UserEmailUpdate(Resource): 
     def patch(self):
@@ -266,6 +276,31 @@ class PastMessages(Resource):
         return make_response({'messages': messages_data, 'responses': responses_data}, 200)
 
 api.add_resource(PastMessages, '/past_messages/<user_id>')
+
+# class DeleteConversations(Resource):
+#     def delete(self):
+#         user_id = session.get('user_id')
+#         if not user_id:
+#             return make_response({'error': 'User not authenticated'}, 401)
+
+#         user = User.query.filter_by(id=user_id).first()
+#         if not user:
+#             return make_response({'error': 'User not found'}, 404)
+
+#         try:
+#             # Delete user's messages
+#             Message.query.filter_by(user_id=user_id).delete()
+#             # Delete user's chatbot responses
+#             ChatbotResponse.query.filter_by(user_id=user_id).delete()
+#             db.session.commit()
+
+#             return make_response({'message': 'User conversations deleted'}, 200)
+#         except Exception as e:
+#             print('Error:', repr(e))
+#             return make_response({'error': 'An error occurred'}, 422)
+
+# api.add_resource(DeleteConversations, '/user/delete_conversations')
+
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)

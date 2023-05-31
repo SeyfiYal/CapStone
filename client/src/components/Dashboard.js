@@ -2,10 +2,10 @@ import { faBuildingCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import '../styling/DashBoard.css';
 import UserContext from './UserContext';
-import Sidebar from './Sidebar'; // Import the Sidebar component
+import Sidebar from './Sidebar'; 
 import SettingsSidebar from './SettingsSidebar';
 
-// Create a JavaScript version of the ChatBot class
+
 class ChatBot {
   intents = [
     ['hi|hello|hey|hey there', ['Hey there!']],
@@ -14,16 +14,20 @@ class ChatBot {
     ['.*', ['I\'m not sure what you mean, can you please rephrase that?', 'Sorry, I don\'t understand what you\'re asking!', 'I\'m not sure I know the answer to that!']],
     
   ];
-
+  /*respond method takes userInput string as an argument and iterate over intents array -> use For Loop!*/ 
   respond(userInput) {
     for (let i = 0; i < this.intents.length; i++) {
+      /* Create a regular expression using the pattern from each intent*/ 
       let pattern = new RegExp(this.intents[i][0]);
+      /* Test the pattern(userInput) against the pattern*/ 
       if (pattern.test(userInput)) {
         let responses = this.intents[i][1];
+        /* If a pattern(userInput) matches the userInput, Select a random response from the corresponding array of responses: */ 
         let response = responses[Math.floor(Math.random() * responses.length)];
         return response;
       }
     }
+     /* If no pattern matches the userInput return the default response like sorry */ 
     return "Sorry, I didn't understand that.";
   }
 }

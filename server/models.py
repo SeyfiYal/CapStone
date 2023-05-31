@@ -20,6 +20,10 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
 
     # messages = db.relationship('Message', backref='users', lazy=False)
+
+
+    # One-to-many with message
+    # Each user can have multiple chatbot responses.
     message = db.relationship('ChatbotResponse', back_populates='users', lazy=False)
 
     @validates('name', 'username','password')
@@ -52,10 +56,12 @@ class Message(db.Model):
             'id': self.id,
             'content': self.content,
             'user_id': self.user_id,
-            # any other fields you want to include
+    
         }
 
     # Relationship with user
+    # Many-to-one with user model
+    # Each message belongs to a single user.
     user = db.relationship('ChatbotResponse',back_populates='messages',lazy=False)
 
 
@@ -75,9 +81,12 @@ class ChatbotResponse(db.Model):
             'message_id': self.message_id,
             'user_id': self.user_id,
             'response_content': self.response_content,
-            # any other fields you want to include
+
         }
 
+    # Many-to-one with User and Message Models
+    # Each response belongs to a single user.
+    # Each response belongs to a single message.
     users = db.relationship('User', back_populates='message', lazy=False)
     messages = db.relationship('Message', back_populates='user', lazy=False)
 

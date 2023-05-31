@@ -1,7 +1,7 @@
 import React, { useContext,useState } from 'react';
 import '../styling/SettingsSidebar.css';
 import UserContext from './UserContext';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import { useNavigate } from 'react-router-dom';
 
 
 function SettingsSidebar({ isOpen, onSettingsUpdate,closeSettings }) {
@@ -9,12 +9,12 @@ function SettingsSidebar({ isOpen, onSettingsUpdate,closeSettings }) {
   const [newPassword, setNewPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [currentEmailPassword, setCurrentEmailPassword] = useState(""); // new state
-  const navigate = useNavigate(); // Add useNavigate hook
+  const [currentEmailPassword, setCurrentEmailPassword] = useState("");
+  const navigate = useNavigate();
 
 
   const { user, setUser } = useContext(UserContext);
-  const API_URL = "http://localhost:5555"; // replace with your Flask API URL
+  const API_URL = "http://localhost:5555"; 
 
   function handlePasswordChange() {
     if (newPassword !== repeatPassword) {
@@ -59,24 +59,43 @@ function SettingsSidebar({ isOpen, onSettingsUpdate,closeSettings }) {
 }
 
 
+
 function handleDeleteAccount() {
     if (window.confirm('Are you sure you want to delete your account?')) {
-        fetch(`${API_URL}/user/delete`, {
-            method: 'DELETE',
-            credentials: 'include',
-          })
-          .then(res => res.json())
-          .then(data => {
-            if (data.message) {
-              alert(data.message);
-              navigate('/'); // navigate to home or login page after deletion
-            } else if (data.error) {
-              alert(data.error);
-            }
-          });
-          
+      fetch(`${API_URL}/user/delete`, {
+        method: 'DELETE',
+        credentials: 'include',
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message) {
+          alert(data.message);
+          setUser(null); 
+        } else if (data.error) {
+          alert(data.error);
+        }
+      });
     }
   }
+  
+// function handleDeleteAccount() {
+//     if (window.confirm('Are you sure you want to delete your account?')) {
+//         fetch(`${API_URL}/user/delete`, {
+//             method: 'DELETE',
+//             credentials: 'include',
+//           })
+//           .then(res => res.json())
+//           .then(data => {
+//             if (data.message) {
+//               alert(data.message);
+//               navigate('/'); // navigate to home or login page after deletion
+//             } else if (data.error) {
+//               alert(data.error);
+//             }
+//           });
+          
+//     }
+//   }
 
 
   return (

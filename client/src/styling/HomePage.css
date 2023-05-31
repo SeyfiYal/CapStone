@@ -1,11 +1,12 @@
 body {
     background-color: #000000; 
+    overflow: auto; 
   }
   
   
   .front-page {
     text-align: center;
-    padding: 100px;
+    padding: 150px;
   }
   
   .front-page h1 {

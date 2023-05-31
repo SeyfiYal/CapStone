@@ -155,8 +155,86 @@ def create_response():
     db.session.commit()
     return jsonify({'id': chatbotresponse.id}), 201
 
+class UserUpdate(Resource): 
+    def patch(self):
+        user_id = session.get('user_id')
+        if not user_id:
+            return make_response({'error': 'User not authenticated'}, 401)
+
+        user = User.query.filter_by(id=user_id).first()
+        if not user:
+            return make_response({'error': 'User not found'}, 404)
+
+        data = request.get_json()
+        current_password = data.get('currentPassword')
+        new_password = data.get('newPassword')
+        email = data.get('email', user.email)
+
+        # Check if current password matches stored password
+        if user.password != current_password:
+            return make_response({'error': 'Current password does not match'}, 401)
+
+        user.password = new_password
+        user.email = email
+
+        try:
+            db.session.commit()
+            return make_response({'message': 'User info updated'}, 200)
+        except Exception as e:
+            print('Error:', repr(e))
+            return make_response({'error': 'An error occurred'}, 422)
+
+api.add_resource(UserUpdate, '/user/update')
 
 
+class UserDelete(Resource): 
+    def delete(self):
+        user_id = session.get('user_id')
+        if not user_id:
+            return make_response({'error': 'User not authenticated'}, 401)
+
+        user = User.query.filter_by(id=user_id).first()
+        if not user:
+            return make_response({'error': 'User not found'}, 404)
+
+        try:
+            db.session.delete(user)
+            db.session.commit()
+            return make_response({'message': 'User deleted'}, 200)
+        except Exception as e:
+            print('Error:', repr(e))
+            return make_response({'error': 'An error occurred'}, 422)
+
+api.add_resource(UserDelete, '/user/delete')
+
+class UserEmailUpdate(Resource): 
+    def patch(self):
+        user_id = session.get('user_id')
+        if not user_id:
+            return make_response({'error': 'User not authenticated'}, 401)
+
+        user = User.query.filter_by(id=user_id).first()
+        if not user:
+            return make_response({'error': 'User not found'}, 404)
+
+        data = request.get_json()
+        current_password = data.get('currentPassword')
+        email = data.get('email', user.email)
+
+        # Check if current password matches stored password
+        if user.password != current_password:
+            return make_response({'error': 'Current password does not match'}, 401)
+
+        user.email = email
+
+        try:
+            db.session.commit()
+            return make_response({'message': 'User email updated'}, 200)
+        except Exception as e:
+            print('Error:', repr(e))
+            return make_response({'error': 'An error occurred'}, 422)
+
+api.add_resource(UserEmailUpdate, '/user/update_email')
 
 
 class PastMessages(Resource):
@@ -189,115 +267,8 @@ class PastMessages(Resource):
 
 api.add_resource(PastMessages, '/past_messages/<user_id>')
 
-
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
-
-
-# class PastMessages(Resource):
-#     def get(self, user_id):
-#         messages = Message.query.filter(Message.user_id == user_id).all()
-#         responses = ChatbotResponse.query.filter(ChatbotResponse.user_id == user_id).all()
-
-#         message_list = [message.to_dict() for message in messages]
-#         response_list = [response.to_dict() for response in responses]
-
-#         return {'messages': message_list, 'responses': response_list}
-
-# api.add_resource(PastMessages, '/past_messages/<int:user_id>')
-
-
-
-# @app.route('/messages/<user_id>', methods=['GET'])
-# def get_messages(user_id):
-#     # Fetch all messages and responses for the specified user from the database
-#     messages = Message.query.filter_by(user_id=user_id).all()
-#     responses = ChatbotResponse.query.filter_by(user_id=user_id).all()
-
-#     # Convert the messages and responses to dictionaries so they can be JSON serialized
-#     messages = [message.__dict__ for message in messages]
-#     responses = [response.__dict__ for response in responses]
-
-#     # Return the messages and responses as JSON
-#     return jsonify({'messages': messages, 'responses': responses})
-
-
-
-
-# class Messages(Resource):
-#     def post(self):
-#         data = request.get_json()
-#         user_id = session.get('user_id')
-#         if not user_id:
-#             return make_response({'error': 'User not authenticated'}, 401)
-
-#         content = data.get('content')
-#         if not content:
-#             return make_response({'error': 'Message content is required'}, 422)
-
-#         try:
-#             new_message = Message(
-#                 content=content,
-#                 user_id=user_id
-#             )
-
-#             db.session.add(new_message)
-#             db.session.commit()
-#             return make_response({'message': 'Message created'}, 200)
-#         except Exception as e:
-#             print('Error:', repr(e))
-#             return make_response({'error': 'An error occurred'}, 422)
-
-
-# api.add_resource(Messages, '/messages')
-
-
-
-    
-
-# class Messages(Resource): 
-#     def get(self, user_id):
-#         user = User.query.get(user_id)
-#         if user:
-#             return jsonify([message.to_dict() for message in user.messages])
-#         else:
-#             return make_response({'error': 'User not found'}, 404)
-
-#     def post(self, user_id):
-#         data = request.get_json()
-#         message = Message(content=data.get('content'), user_id=user_id)
-#         db.session.add(message)
-#         db.session.commit()
-#         return make_response({'message': 'Message created'}, 200)
-
-# api.add_resource(Messages, '/users/<int:user_id>/messages')
-
-
-
-
-
-
-# class Messages(Resource):
-#     def post(self):
-#         data = request.get_json()
-#         content = data['content']
-#         user_id = data.get('user_id')
-
-#         if not user_id:
-#             return make_response({'error': 'User ID is required'}, 400)
-
-#         try:
-#             message = Message(content=content, user_id=user_id)
-#             db.session.add(message)
-#             db.session.commit()
-#             return make_response(message.to_dict(), 201)
-#         except Exception as e:
-#             return make_response({'error': str(e)}, 500)
-
-# api.add_resource(Messages, '/messages')
-
-
-
 
 
 

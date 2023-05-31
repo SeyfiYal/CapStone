@@ -7,7 +7,7 @@ import Login from './components/Login';
 import CreateAccount from './components/CreateAccount';
 import Dashboard from './components/Dashboard';
 import Logout from './components/Logout';
-import UserContext from './components/UserContext'; // Import the UserContext
+import UserContext from './components/UserContext';
 
 function App() {
   const navigate = useNavigate();
@@ -23,11 +23,8 @@ function App() {
     }
   }, []);
   
-
-  // Add other necessary state variables
-
   return (
-    <UserContext.Provider value={{ userId, setUserId }}> {/* Wrap your components with UserContext.Provider */}
+    <UserContext.Provider value={{ userId, setUserId }}> 
       <div className="App">
         <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
@@ -35,7 +32,7 @@ function App() {
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/logout" element={<Logout setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="/dashboard" element={<Dashboard />} /> {/* Remove the userId prop from Dashboard */}
+          <Route path="/dashboard" element={<Dashboard />} />   
         </Routes>
       </div>
     </UserContext.Provider>

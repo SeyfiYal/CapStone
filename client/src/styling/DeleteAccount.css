@@ -1,0 +1,70 @@
+.delete-account-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #151515;
+    color: #c7c7c7;
+    font-family: 'Poppins', sans-serif;
+}
+
+.delete-account-container h1 {
+    color: #c7c7c7;
+}
+
+.delete-account-container p {
+    margin: 10px 0;
+    line-height: 1.5;
+    color: #868686;
+}
+.delete-account-container button {
+    display: block;
+    width: 10%;
+    height: 50px;
+    margin: 20px auto;
+    padding: 0 15px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #868686;
+    background: linear-gradient(#333,#222);
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.3s, background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    animation: glow .8s ease-out infinite alternate; /* Moved from :hover state */
+}
+
+.delete-account-container button:focus {
+    color: #339933;
+    border-color: #339933;
+    box-shadow: 0 0 5px rgba(0,255,0,.3),
+                0 0 10px rgba(0,255,0,.2),
+                0 0 15px rgba(0,255,0,.1),
+                0 2px 0 rgb(0, 0, 0);
+    background: linear-gradient(#333933,#222922);
+}
+
+.delete-account-container button:hover {
+    color: #339933;
+    border-color: #339933;
+    box-shadow: 0 0 5px rgba(0,255,0,.3),
+                0 0 10px rgba(0,255,0,.2),
+                0 0 15px rgba(0,255,0,.1),
+                0 2px 0 rgb(0, 0, 0);
+}
+
+@keyframes glow {
+    0%{
+        border-color: #339933;
+        box-shadow: 0 0 5px rgba(0,255,0,.2),
+                    inset 0 0 5px rgba(0,0,0,.1);
+    }
+    100%{
+        border-color: #6f6;
+        box-shadow: 0 0 20px rgba(0,255,0,.6),
+                    inset 0 0 10px rgba(0,255,0,.4);
+    }
+}

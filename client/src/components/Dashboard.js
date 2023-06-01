@@ -4,6 +4,7 @@ import '../styling/DashBoard.css';
 import UserContext from './UserContext';
 import Sidebar from './Sidebar'; 
 import SettingsSidebar from './SettingsSidebar';
+import Typewriter from 'typewriter-effect';
 
 
 class ChatBot {
@@ -46,6 +47,7 @@ function Dashboard() {
 
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const [typingMessage, setTypingMessage] = useState(null);
   const chatbot = new ChatBot();
   const chatArea = useRef(null);
   const { userId } = useContext(UserContext);

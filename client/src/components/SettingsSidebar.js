@@ -59,43 +59,29 @@ function SettingsSidebar({ isOpen, onSettingsUpdate,closeSettings }) {
 }
 
 
-
 function handleDeleteAccount() {
-    if (window.confirm('Are you sure you want to delete your account?')) {
-      fetch(`${API_URL}/user/delete`, {
-        method: 'DELETE',
-        credentials: 'include',
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.message) {
-          alert(data.message);
-          setUser(null); 
-        } else if (data.error) {
-          alert(data.error);
-        }
-      });
-    }
+    navigate("/deleteAccount"); // The route name depends on your routes configuration in App.js
   }
   
 // function handleDeleteAccount() {
 //     if (window.confirm('Are you sure you want to delete your account?')) {
-//         fetch(`${API_URL}/user/delete`, {
-//             method: 'DELETE',
-//             credentials: 'include',
-//           })
-//           .then(res => res.json())
-//           .then(data => {
-//             if (data.message) {
-//               alert(data.message);
-//               navigate('/'); // navigate to home or login page after deletion
-//             } else if (data.error) {
-//               alert(data.error);
-//             }
-//           });
-          
+//       fetch(`${API_URL}/user/delete`, {
+//         method: 'DELETE',
+//         credentials: 'include',
+//       })
+//       .then(res => res.json())
+//       .then(data => {
+//         if (data.message) {
+//           alert(data.message);
+//           setUser(null); 
+//         } else if (data.error) {
+//           alert(data.error);
+//         }
+//       });
 //     }
 //   }
+  
+
 
 
   return (
@@ -139,6 +125,7 @@ function handleDeleteAccount() {
       <button onClick={handleEmailChange}>Save Changes</button>
 
       <button className="delete-btn" onClick={handleDeleteAccount}>Delete Account</button>
+
       
     </div>
   );
@@ -146,3 +133,23 @@ function handleDeleteAccount() {
 
 export default SettingsSidebar;
 
+
+
+// function handleDeleteAccount() {
+//     if (window.confirm('Are you sure you want to delete your account?')) {
+//         fetch(`${API_URL}/user/delete`, {
+//             method: 'DELETE',
+//             credentials: 'include',
+//           })
+//           .then(res => res.json())
+//           .then(data => {
+//             if (data.message) {
+//               alert(data.message);
+//               navigate('/'); // navigate to home or login page after deletion
+//             } else if (data.error) {
+//               alert(data.error);
+//             }
+//           });
+          
+//     }
+//   }

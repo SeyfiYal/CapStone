@@ -8,23 +8,28 @@ import CreateAccount from './components/CreateAccount';
 import Dashboard from './components/Dashboard';
 import Logout from './components/Logout';
 import UserContext from './components/UserContext';
+import DeleteAccount from './components/DeleteAccount';
 
 function App() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(localStorage.getItem('userId') || null);
-  const [messages, setMessages] = useState([]);
+  const [userName, setUserName] = useState(localStorage.getItem('userName') || ''); 
 
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
+    const storedUserName = localStorage.getItem('userName'); 
     if (storedUserId) {
       setUserId(storedUserId);
       setIsLoggedIn(true);
     }
+    if (storedUserName) { 
+      setUserName(storedUserName);
+    }
   }, []);
   
   return (
-    <UserContext.Provider value={{ userId, setUserId }}> 
+    <UserContext.Provider value={{ userId, setUserId, userName, setUserName, setIsLoggedIn }}> 
       <div className="App">
         <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         <Routes>
@@ -33,6 +38,7 @@ function App() {
           <Route path="/logout" element={<Logout setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/dashboard" element={<Dashboard />} />   
+          <Route path="/deleteAccount" element={<DeleteAccount />} />
         </Routes>
       </div>
     </UserContext.Provider>
@@ -40,6 +46,7 @@ function App() {
 }
 
 export default App;
+
 
 
   // useEffect(() => {

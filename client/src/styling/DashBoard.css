@@ -130,3 +130,6 @@ button:hover {
   background: linear-gradient(#333933,#222922);
   animation: glow .8s ease-out infinite alternate;
 }
+.overlord-msg-response p {
+  color: #339933; /* Change this to any color you want */
+}

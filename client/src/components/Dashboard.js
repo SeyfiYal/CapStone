@@ -132,22 +132,21 @@ function Dashboard() {
       <div id="main" className="chat-box">
         <div className="chat-area" ref={chatArea}>
           {messages.map((message, index) => (
-            <div key={index} className={`${message.sender}-msg`}>
-              <p><strong>{message.sender}:</strong> {message.typing ? (
-                <Typewriter
-                  options={{
-                    delay: 25, // This is the typing speed in milliseconds.
-                  }}
-                  onInit={(typewriter) => {
-                    typewriter
-                      .typeString(message.text)
-                      .pauseFor(Infinity)
-                      .start();
-                  }}
-                />
-              ) : (
-                message.text
-              )}</p>
+            <div key={index} className={`${message.sender}-msg ${message.sender === 'Over-Lord' ? 'overlord-msg-response' : ''}`}>
+              <p><strong>{message.sender}:</strong> 
+                {message.typing ? (
+                  <Typewriter
+                    options={{
+                      delay: 25, // This is the typing speed in milliseconds.
+                    }}
+                    onInit={(typewriter) => {
+                      typewriter
+                        .typeString(message.text)
+                        .start();
+                    }}
+                  />
+                ) : message.text}
+              </p>
             </div>
           ))}
         </div>
@@ -156,6 +155,7 @@ function Dashboard() {
         </form>
       </div>
     </div>
+
   );
 }
 

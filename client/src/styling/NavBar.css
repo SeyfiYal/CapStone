@@ -10,8 +10,10 @@
   justify-content: flex-end;
   padding: 0 20px;
   box-sizing: border-box;
+  box-shadow: 0 10px 10px #80ab80;
   z-index: 1;
 }
+
 
 .navbar a {
   display: inline-block;
@@ -41,12 +43,6 @@
     padding-bottom: 10px;
   }
 }
-
-
-
-
-
-
 
 
 

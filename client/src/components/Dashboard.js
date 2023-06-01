@@ -10,21 +10,27 @@ class ChatBot {
     ['hi|hello|hey|hey there', ['Hey there!']],
     ['what\'s up|sup|what\'s new', ['Not much, just chatting with you!', 'Just hanging out, how about you?', 'Nothing new, how about you?']],
     ['how are you|how\'s it going|how have you been', ['I\'m good, how about you?', 'I\'ve been doing alright, thanks for asking! How about you?']],
+    ['what is (\\d+) \\+ (\\d+)\\?', [(match) => `The sum of ${match[1]} and ${match[2]} is ${parseInt(match[1]) + parseInt(match[2])}`]],
+    ['what is (\\d+) - (\\d+)\\?', [(match) => `The difference of ${match[1]} and ${match[2]} is ${parseInt(match[1]) - parseInt(match[2])}`]],
+    ['what is (\\d+) / (\\d+)\\?', [(match) => parseInt(match[2]) !== 0 ? `The quotient of ${match[1]} and ${match[2]} is ${parseInt(match[1]) / parseInt(match[2])}` : "Cannot divide by zero"]],
+    ['what is (\\d+) x (\\d+)\\?', [(match) => `The product of ${match[1]} and ${match[2]} is ${parseInt(match[1]) * parseInt(match[2])}`]],
     ['.*', ['I\'m not sure what you mean, can you please rephrase that?', 'Sorry, I don\'t understand what you\'re asking!', 'I\'m not sure I know the answer to that!']],
   ];
 
   respond(userInput) {
     for (let i = 0; i < this.intents.length; i++) {
       let pattern = new RegExp(this.intents[i][0]);
-      if (pattern.test(userInput)) {
+      let match = pattern.exec(userInput);
+      if (match) {
         let responses = this.intents[i][1];
-        let response = responses[Math.floor(Math.random() * responses.length)];
+        let response = (typeof responses[0] === 'function') ? responses[0](match) : responses[Math.floor(Math.random() * responses.length)];
         return { text: response, typing: true };
       }
     }
     return { text: "Sorry, I didn't understand that.", typing: true };
   }
 }
+
 
 function Dashboard() {
 

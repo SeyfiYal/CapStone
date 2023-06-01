@@ -8,7 +8,7 @@ body{
   position: relative;
   width: 970px;
   height: 600px; 
-  background: #1b1b1b90;
+  background: #1b1b1b88;
   padding: 20px;
   box-sizing: border-box;
   border: 1px solid rgb(0, 0, 0);
@@ -41,27 +41,6 @@ body{
   background: linear-gradient(#333,#222);
 }
 
-/* .field input, form button {
-  height: 50px;
-  width: 100%;
-  background-color: #333;
-  outline: none;
-  font-size: 16px;
-  color: #868686;
-  padding: 0 15px;
-  border-radius: 0 5px 5px 0;
-  border: 1px solid #444;
-  caret-color: #339933;
-  background: linear-gradient(#333,#222);
-}
-
-input:focus {
-  color: #339933;
-  box-shadow: 0 0 5px rgba(0,255,0,.2),
-              inset 0 0 5px rgba(0,255,0,.1);
-  background: linear-gradient(#333933,#222922);
-  animation: glow .8s ease-out infinite alternate;
-} */
 
 @keyframes glow {
   0%{
@@ -91,22 +70,6 @@ input {
 }
 
 
-/* button {
-  margin-top: 10px;
-  border-radius: 5px!important;
-  font-weight: 600;
-  letter-spacing: 1px;
-  cursor: pointer;
-}
-
-button:hover {
-  color: #339933;
-  border: 1px solid #339933;
-  box-shadow: 0 0 5px rgba(0,255,0,.3),
-              0 0 10px rgba(0,255,0,.2),
-              0 0 15px rgba(0,255,0,.1),
-              0 2px 0 black;
-} */
 .chat-input {
   height: 50px;
   width: 100%;
@@ -131,5 +94,5 @@ button:hover {
   animation: glow .8s ease-out infinite alternate;
 }
 .overlord-msg-response p {
-  color: #339933; /* Change this to any color you want */
+  color: #339933; 
 }

@@ -144,7 +144,7 @@ export default CreateAccount;
 
 
 
-
+/////////////// No Formik in the below code ////////////////////
 
 // import React, { useState } from "react";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

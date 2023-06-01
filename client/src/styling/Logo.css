@@ -21,9 +21,9 @@
   
   .logo {
     display: block;
-    width: 350px; /* Adjust the width as desired */
-    height: auto; /* Maintain aspect ratio */
-    margin: 0 auto; /* Center horizontally */
-    margin-right: 590px; /* Adjust the margin as desired */
+    width: 350px; 
+    height: auto;
+    margin: 0 auto; 
+    margin-right: 590px;
   }
   

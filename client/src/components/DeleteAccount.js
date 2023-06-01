@@ -34,7 +34,7 @@ function DeleteAccount() {
         <p>Hi, {userName ? userName : "User"},</p>
         <p>We’re sorry to hear you’d like to delete your account.</p>
         <p>If you’re concerned about privacy of your information, we’ve clarified some of the issues that people have asked us about on our Privacy page.</p>
-        <p>If you have other concerns or questions, please reach out to us at my@MrRobot.com</p>
+        <p>If you have other concerns or questions, please reach out to us at my@chatAi.com</p>
         <button onClick={handleDelete}>Delete Account</button>
     </div>
 );

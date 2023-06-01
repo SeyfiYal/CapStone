@@ -10,7 +10,7 @@
   justify-content: flex-end;
   padding: 0 20px;
   box-sizing: border-box;
-  box-shadow: 0 10px 10px #80ab80;
+  box-shadow: 0 10px 10px #75c275;
   z-index: 1;
 }
 
@@ -44,33 +44,3 @@
   }
 }
 
-
-
-/* Style the navigation bar */
-/* .navbar {
-  width: 100%;
-  background-color: #555;
-  overflow: auto;
-} */
-
-/* Navbar links */
-  /* .navbar a {
-  display: inline-block;
-  float: right;
-  padding: 10px 20px;
-  background-color: #ffffff;
-  color: #000000;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 15px;
-  animation: glow 2s infinite alternate;
-} */
-
-
-/* Add responsiveness - will automatically display the navbar vertically instead of horizontally on screens less than 500 pixels */
-/* @media screen and (max-width: 500px) {
-  .navbar a {
-    float: none;
-    display: block;
-  }
-} */

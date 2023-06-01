@@ -1,11 +1,9 @@
-import { faBuildingCircleArrowRight } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import '../styling/DashBoard.css';
 import UserContext from './UserContext';
-import Sidebar from './Sidebar'; 
+import Sidebar from './Sidebar';
 import SettingsSidebar from './SettingsSidebar';
 import Typewriter from 'typewriter-effect';
-
 
 class ChatBot {
   intents = [
@@ -13,41 +11,35 @@ class ChatBot {
     ['what\'s up|sup|what\'s new', ['Not much, just chatting with you!', 'Just hanging out, how about you?', 'Nothing new, how about you?']],
     ['how are you|how\'s it going|how have you been', ['I\'m good, how about you?', 'I\'ve been doing alright, thanks for asking! How about you?']],
     ['.*', ['I\'m not sure what you mean, can you please rephrase that?', 'Sorry, I don\'t understand what you\'re asking!', 'I\'m not sure I know the answer to that!']],
-    
   ];
-  /*respond method takes userInput string as an argument and iterate over intents array -> use For Loop!*/ 
+
   respond(userInput) {
     for (let i = 0; i < this.intents.length; i++) {
-      /* Create a regular expression using the pattern from each intent*/ 
       let pattern = new RegExp(this.intents[i][0]);
-      /* Test the pattern(userInput) against the pattern*/ 
       if (pattern.test(userInput)) {
         let responses = this.intents[i][1];
-        /* If a pattern(userInput) matches the userInput, Select a random response from the corresponding array of responses: */ 
         let response = responses[Math.floor(Math.random() * responses.length)];
-        return response;
+        return { text: response, typing: true };
       }
     }
-     /* If no pattern matches the userInput return the default response like sorry */ 
-    return "Sorry, I didn't understand that.";
+    return { text: "Sorry, I didn't understand that.", typing: true };
   }
 }
 
 function Dashboard() {
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
 
   function handleSettingsClick() {
     setIsSettingsOpen(!isSettingsOpen);
   }
 
   function handleSettingsUpdate(updatedSettings) {
-
     console.log('Updated Settings:', updatedSettings);
   }
 
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState([]);
-  const [typingMessage, setTypingMessage] = useState(null);
   const chatbot = new ChatBot();
   const chatArea = useRef(null);
   const { userId } = useContext(UserContext);
@@ -80,7 +72,7 @@ function Dashboard() {
           setMessages([
             ...messages,
             { text: userInput, sender: 'Human' },
-            { text: botResponse, sender: 'Over-Lord' },
+            { text: botResponse.text, sender: 'Over-Lord', typing: botResponse.typing },
           ]);
 
           fetch('http://localhost:5555/responses', {
@@ -89,7 +81,7 @@ function Dashboard() {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              response_content: botResponse,
+              response_content: botResponse.text,
               message_id: data.id,
             }),
             credentials: 'include',
@@ -128,7 +120,7 @@ function Dashboard() {
         console.error('Error:', error);
       });
   }, []);
-    
+
   function handleInputChange(e) {
     setUserInput(e.target.value);
   }
@@ -141,7 +133,21 @@ function Dashboard() {
         <div className="chat-area" ref={chatArea}>
           {messages.map((message, index) => (
             <div key={index} className={`${message.sender}-msg`}>
-              <p><strong>{message.sender}:</strong> {message.text}</p>
+              <p><strong>{message.sender}:</strong> {message.typing ? (
+                <Typewriter
+                  options={{
+                    delay: 25, // This is the typing speed in milliseconds.
+                  }}
+                  onInit={(typewriter) => {
+                    typewriter
+                      .typeString(message.text)
+                      .pauseFor(Infinity)
+                      .start();
+                  }}
+                />
+              ) : (
+                message.text
+              )}</p>
             </div>
           ))}
         </div>

@@ -132,6 +132,7 @@ function Dashboard() {
   }
 
   return (
+    
     <div className="front-page">
       <Sidebar onSettingsClick={handleSettingsClick} />
       {isSettingsOpen && <SettingsSidebar onSettingsUpdate={handleSettingsUpdate} />}

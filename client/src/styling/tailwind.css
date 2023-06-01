@@ -1,0 +1,27 @@
+/* src/styling/SideBar.css */
+
+.sidebar-container.dark {
+    background-color: #1f2937;
+    color: #f8fafc;
+  }
+  
+  .sidebar-container.dark .sidenav {
+    background-color: #1f2937;
+  }
+  
+  .sidebar-container.dark .sidenav a {
+    color: #f8fafc;
+  }
+  
+  .sidebar-container.dark .closebtn {
+    color: #f8fafc;
+  }
+  
+  .sidebar-container.dark .closebtn:hover {
+    color: #f8fafc;
+  }
+  
+  .sidebar-container.dark .closebtn:focus {
+    color: #f8fafc;
+  }
+  

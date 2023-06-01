@@ -96,3 +96,16 @@ input {
 .overlord-msg-response p {
   color: #339933; 
 }
+
+
+.dashboard-container.dark {
+  background-color: #1f2937;
+  color: #f8fafc;
+}
+
+/* Dashboard.css */
+
+.dark {
+  background-color: #333;
+  color: #fff;
+}

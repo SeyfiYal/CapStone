@@ -19,7 +19,7 @@ function NavBar({ isLoggedIn, setIsLoggedIn }) {
     <div className="navbar">
       <img className="logo" src={logo} alt="Chat AI Logo" />
       {location.pathname === '/dashboard' && (
-        <span className="menu-button" style={{ fontSize: '30px', cursor: 'pointer' }} onClick={openNav}>&#9776; Menu</span>
+        <span className="menu-button" onClick={openNav}>&#9776; Menu</span>
       )}
       {isLoggedIn ? (
         <>

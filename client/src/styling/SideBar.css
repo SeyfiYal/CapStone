@@ -52,7 +52,6 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-
 .menu-button {
   position: absolute;
   left: 0;
@@ -65,14 +64,12 @@
   border-radius: 15px;
   animation: glow 2s infinite alternate;
   cursor: pointer;
-  font-size: 0.6em;  /* reduced font size */
   transition: background-color 0.3s, color 0.3s;
+  font-size: 22px;
+  
 }
 
 .menu-button:hover {
   background-color: #f1f1f1;
   color: #111;
 }
-
-
-  

@@ -54,3 +54,28 @@ function App() {
 
 export default App;
 
+
+
+  // useEffect(() => {
+  //   fetch("http://localhost:5555/check_session", {
+  //       method: "GET",
+  //       credentials: "include", // Include credentials for session management
+  //   })
+  //   .then(response => {
+  //       if (response.ok) {
+  //           setIsLoggedIn(true);
+  //           return response.json();
+  //       } else {
+  //           throw new Error("Not logged in");
+  //       }
+  //   })
+  //   .then(data => {
+  //       console.log("Already logged in:", data);
+  //       // Redirect to dashboard or similar page
+  //       navigate("/dashboard");
+  //   })
+  //   .catch(error => {
+  //       console.error("Error:", error);
+  //   });
+  // }, []);
+

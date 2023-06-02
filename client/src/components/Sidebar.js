@@ -3,6 +3,7 @@ import '../styling/SideBar.css';
 import SettingsSidebar from './SettingsSidebar';
 import { Link } from 'react-router-dom'; 
 
+
 function Sidebar() {
   const [isSidebarOpen, setIsSidebarsOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);

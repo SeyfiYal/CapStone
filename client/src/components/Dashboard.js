@@ -7,14 +7,36 @@ import Typewriter from 'typewriter-effect';
 
 class ChatBot {
   intents = [
-    ['hi|hello|hey|hey there', ['Hey there!']],
+
+
+    ['hi|hello|hey|hey there', ['Hey there!', 'Hi! How can I assist you?']],
+    ['how are you today?', ['I\m doing well what about you?']],
+    ['i am good', ['Thats great to hear!', 'Awesome!', 'Glad to hear that!']],
+    ['so tell me about yourself who are you?', ['I\'m ChatAI, AI Language model developed by Seyfi']],
+    ['what can you do what are your skills?|what are your skills', ['I can chat with you and answer your questions!', 'I\'m here to help you with anything you need!', 'I\'m a chatbot, so I can chat with you about anything!']],
+    ['can you do math?', ['Yes I am able to do some basic maths']],
+    ['great', ['Thanks, Is there anything else i can help you with?']],
+    ['no thank you', ['You\'re welcome! Don\'t hesitate to reach out if you need any help.']],
+    
+    
     ['what\'s up|sup|what\'s new', ['Not much, just chatting with you!', 'Just hanging out, how about you?', 'Nothing new, how about you?']],
     ['how are you|how\'s it going|how have you been', ['I\'m good, how about you?', 'I\'ve been doing alright, thanks for asking! How about you?']],
-    ['what is (\\d+) \\+ (\\d+)\\?', [(match) => `The sum of ${match[1]} and ${match[2]} is ${parseInt(match[1]) + parseInt(match[2])}`]],
-    ['what is (\\d+) - (\\d+)\\?', [(match) => `The difference of ${match[1]} and ${match[2]} is ${parseInt(match[1]) - parseInt(match[2])}`]],
-    ['what is (\\d+) / (\\d+)\\?', [(match) => parseInt(match[2]) !== 0 ? `The quotient of ${match[1]} and ${match[2]} is ${parseInt(match[1]) / parseInt(match[2])}` : "Cannot divide by zero"]],
-    ['what is (\\d+) x (\\d+)\\?', [(match) => `The product of ${match[1]} and ${match[2]} is ${parseInt(match[1]) * parseInt(match[2])}`]],
+    
+    ['bad|not good|not great', ['I\m sorry to hear that. Is there anything I can do to help?', 'I am here to chat if you need someone to talk to.']],
+   
+    ['hi|hello|hey|hey there', ['Hey there!', 'Hello!', 'Hi! How can I assist you?']],
+    ['hi|hello|hey|hey there', ['Hey there!', 'Hello!', 'Hi! How can I assist you?']],
+    ['hi|hello|hey|hey there', ['Hey there!', 'Hello!', 'Hi! How can I assist you?']],
+
+
+    // --> Math Part <-- //
+    ['help|assistance', ['Sure, I am here to help! What do you need assistance with?', 'How can I assist you today?', 'I qm ready to help. What do you need?']],
+    ['what is (\\d+) \\+ (\\d+)\\?', [(match) => `${match[1]} + ${match[2]} = ${parseInt(match[1]) + parseInt(match[2])}`]],
+    ['what is (\\d+) - (\\d+)\\?', [(match) => `${match[1]} - ${match[2]} = ${parseInt(match[1]) - parseInt(match[2])}`]],
+    ['what is (\\d+) / (\\d+)\\?', [(match) => parseInt(match[2]) !== 0 ? ` ${match[1]} / ${match[2]} = ${parseInt(match[1]) / parseInt(match[2])}` : "Cannot divide by zero"]],
+    ['what is (\\d+) x (\\d+)\\?', [(match) => `${match[1]} x ${match[2]} = ${parseInt(match[1]) * parseInt(match[2])}`]],
     ['.*', ['I\'m not sure what you mean, can you please rephrase that?', 'Sorry, I don\'t understand what you\'re asking!', 'I\'m not sure I know the answer to that!']],
+    
   ];
 
   respond(userInput) {
@@ -140,7 +162,7 @@ function Dashboard() {
         <div className="chat-area" ref={chatArea}>
           {messages.map((message, index) => (
             <div key={index} className={`${message.sender}-msg ${message.sender === 'Over-Lord' ? 'overlord-msg-response' : ''}`}>
-              <p><strong>{message.sender}:</strong> 
+              <p><strong>{message.sender}: </strong> 
                 {message.typing ? (
                   <Typewriter
                     options={{

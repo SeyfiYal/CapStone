@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import '../styling/HomePage.css'; // Import your CSS file for styling
+import '../styling/HomePage.css';
 
 function HomePage() {
   return (
